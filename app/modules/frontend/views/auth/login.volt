@@ -279,7 +279,7 @@
             </div>
 
 
-            <button type="submit" class="submit-btn">Sign In</button>
+            <button type="submit" class="submit-btn" id="login-btn">Login</button>
         </form>
 
         <!-- <div class="divider">or continue with</div> -->
@@ -307,7 +307,11 @@
             const password = document.getElementById('password').value;
             const remember = document.getElementById('remember').checked;
 
-            alert(`Login attempted!\nEmail: ${email}\nRemember me: ${remember}`);
+            window.location = '/dashboard';
+        });
+        document.getElementById('login-btn').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.location = '/dashboard';
         });
     </script>
 </body>

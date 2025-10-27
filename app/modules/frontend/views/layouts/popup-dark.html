@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dark Mode Popup</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: "Segoe UI", Roboto, sans-serif;
+			background: #1a1a1a;
+			color: #e0e0e0;
+			padding: 40px;
+		}
+
+		/* Overlay */
+		.popup-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.7);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 1000;
+			opacity: 0;
+			visibility: hidden;
+			transition: all 0.3s ease;
+		}
+
+		.popup-overlay.active {
+			opacity: 1;
+			visibility: visible;
+		}
+
+		/* Popup Container */
+		.popup {
+			background: #2d2d2d;
+			border-radius: 8px;
+			box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+			max-width: 500px;
+			width: 90%;
+			max-height: 90vh;
+			overflow: hidden;
+			transform: scale(0.9);
+			transition: transform 0.3s ease;
+		}
+
+		.popup-overlay.active .popup {
+			transform: scale(1);
+		}
+
+		/* Header */
+		.popup-header {
+			padding: 20px 24px;
+			border-bottom: 1px solid #404040;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.popup-title {
+			font-size: 20px;
+			font-weight: 500;
+			color: #fff;
+		}
+
+		.popup-close {
+			background: none;
+			border: none;
+			color: #b0b0b0;
+			font-size: 24px;
+			cursor: pointer;
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.2s ease;
+		}
+
+		.popup-close:hover {
+			background: #404040;
+			color: #fff;
+		}
+
+		/* Body */
+		.popup-body {
+			padding: 24px;
+			max-height: 60vh;
+			overflow-y: auto;
+			color: #b0b0b0;
+			line-height: 1.6;
+		}
+
+		.popup-body::-webkit-scrollbar {
+			width: 8px;
+		}
+
+		.popup-body::-webkit-scrollbar-track {
+			background: #242424;
+		}
+
+		.popup-body::-webkit-scrollbar-thumb {
+			background: #404040;
+			border-radius: 4px;
+		}
+
+		.popup-body::-webkit-scrollbar-thumb:hover {
+			background: #4a4a4a;
+		}
+
+		/* Footer */
+		.popup-footer {
+			padding: 16px 24px;
+			border-top: 1px solid #404040;
+			display: flex;
+			justify-content: flex-end;
+			gap: 12px;
+		}
+
+		/* Buttons */
+		.btn {
+			font-family: "Segoe UI", Roboto, sans-serif;
+			font-size: 14px;
+			font-weight: 500;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			padding: 10px 24px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			transition: all 0.2s ease;
+		}
+
+		.btn-primary {
+			background: #00bcd4;
+			color: #fff;
+			box-shadow: 0 2px 4px rgba(0, 188, 212, 0.3);
+		}
+
+		.btn-primary:hover {
+			background: #00acc1;
+			box-shadow: 0 4px 8px rgba(0, 188, 212, 0.4);
+		}
+
+		.btn-secondary {
+			background: transparent;
+			color: #00bcd4;
+			border: 1px solid #404040;
+		}
+
+		.btn-secondary:hover {
+			background: rgba(0, 188, 212, 0.08);
+			border-color: #00bcd4;
+		}
+
+		/* Demo Button */
+		.demo-btn {
+			background: #00bcd4;
+			color: #fff;
+			border: none;
+			padding: 12px 24px;
+			font-size: 16px;
+			border-radius: 4px;
+			cursor: pointer;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+		}
+
+		.demo-btn:hover {
+			background: #00acc1;
+		}
+	</style>
+</head>
+
+<body>
+	<h1 style="margin-bottom: 20px;">Dark Mode Material UI Popup</h1>
+	<button class="demo-btn" onclick="openPopup()">Open Popup</button>
+
+	<!-- Popup -->
+	<div class="popup-overlay" id="popupOverlay">
+		<div class="popup">
+			<div class="popup-header">
+				<h2 class="popup-title">Confirmation Required</h2>
+				<button class="popup-close" onclick="closePopup()">×</button>
+			</div>
+			<div class="popup-body">
+				<p>Are you sure you want to proceed with this action? This operation cannot be undone.</p>
+				<p style="margin-top: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua.</p>
+			</div>
+			<div class="popup-footer">
+				<button class="btn btn-secondary" onclick="closePopup()">Cancel</button>
+				<button class="btn btn-primary" onclick="confirm()">Confirm</button>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function openPopup() {
+			document.getElementById('popupOverlay').classList.add('active');
+			document.body.style.overflow = 'hidden';
+		}
+
+		function closePopup() {
+			document.getElementById('popupOverlay').classList.remove('active');
+			document.body.style.overflow = '';
+		}
+
+		function confirm() {
+			alert('Action confirmed!');
+			closePopup();
+		}
+
+		// Close on overlay click
+		document.getElementById('popupOverlay').addEventListener('click', function (e) {
+			if (e.target === this) {
+				closePopup();
+			}
+		});
+
+		// Close on ESC key
+		document.addEventListener('keydown', function (e) {
+			if (e.key === 'Escape') {
+				closePopup();
+			}
+		});
+	</script>
+</body>
+
+</html>

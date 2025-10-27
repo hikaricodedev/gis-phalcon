@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace Gis\Modules\Frontend\Controllers;
 
-class IndexController extends ControllerBase
+class GisPhalconController extends ControllerBase
 {
 
     public function indexAction()
     {
-        return $this->response->redirect('/auth/login');
+        
     }
 
 }

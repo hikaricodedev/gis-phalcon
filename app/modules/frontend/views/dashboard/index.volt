@@ -23,6 +23,28 @@
     z-index: 0;
 
   }
+  .tooltip-hijau {
+    background: #004d00;
+    color: #ffffff;
+    border-color: #ffffff00;
+    text-align: center;
+  }
+
+  .tooltip-kuning {
+    background: #c2b502;
+    color: #ffffff;
+    border-color: #ffffff00;
+    text-align: center;
+  }
+  .pressure-tip {
+    
+  }
+  /* .leaflet-tile {
+    filter: hue-rotate(90deg) saturate(105%) contrast(98%) invert(90%);
+    -webkit-filter: hue-rotate(90deg) saturate(105%) contrast(98%) invert(90%);
+    -moz-filter: hue-rotate(90deg) saturate(105%) contrast(98%) invert(90%);
+  } */
+
 </style>
 <main class="main-content">
   <h1>Test Template</h1>
@@ -94,8 +116,41 @@
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
+    // const geojsonLayer = L.geoJSON([], {
+    //   style: function (feature) {
+    //     // style khusus untuk geometry bertipe "LineString" atau "Polygon"
+    //     switch (feature.properties.category) {
+    //       case 'park':
+    //         return { color: '#2ecc71', fillColor: '#27ae60', weight: 2, fillOpacity: 0.6 }; // hijau
+    //       case 'road':
+    //         return { color: '#95a5a6', weight: 2, fillOpacity: 0.4 }; // abu-abu
+    //       default:
+    //         return { color: '#1abc9c', fillColor: '#16a085', weight: 2, fillOpacity: 0.5 }; // hijau kebiruan
+    //     }
+    //   },
+    //   pointToLayer: function (feature, latlng) {
+    //     // style khusus untuk Point (titik)
+    //     return L.circleMarker(latlng, {
+    //       radius: 8,
+    //       fillColor: '#2ecc71', // hijau muda
+    //       color: '#ffffff',
+    //       weight: 1,
+    //       opacity: 1,
+    //       fillOpacity: 0.8
+    //     });
+    //   }
+    // }).addTo(map);
+
+
     const customIcon = L.icon({
-      iconUrl: '/images/gauge.png', // URL gambar icon
+      iconUrl: "{{url('/images/')}}gauge.png", // URL gambar icon
+      iconSize: [38, 38], // ukuran icon [width, height]
+      iconAnchor: [19, 38], // posisi anchor (titik bawah icon)
+      popupAnchor: [0, -38] // posisi popup relatif terhadap icon
+    });
+
+    const customIconRed = L.icon({
+      iconUrl: "{{url('/images/')}}gauge_red.png", // URL gambar icon
       iconSize: [38, 38], // ukuran icon [width, height]
       iconAnchor: [19, 38], // posisi anchor (titik bawah icon)
       popupAnchor: [0, -38] // posisi popup relatif terhadap icon
@@ -228,7 +283,7 @@
     // METHOD 1: Manual satu per satu
     locations.forEach((location, index) => {
       const marker = L.marker([location.lat, location.lng], {
-          icon: customIcon,
+          icon: location.pressure > 7 ? customIcon : customIconRed,
           data: location, // simpan data lokasi
           index: index    // simpan index
       })
@@ -237,8 +292,8 @@
           <b>${location.title}</b><br>
           ${location.description}<br>
           <small>Marker #${index + 1}</small>
-      `)
-      .bindTooltip(location.tooltip, { permanent: true, direction: "top", offset: [0, -35] })
+      ` )
+      .bindTooltip(location.tooltip +'<br/>' + (location.pressure/10) + ' bar</span>', { permanent: true, direction: "bottom", offset: [0, -5] , className : location.pressure < 5 ? 'tooltip-kuning' : 'tooltip-hijau'})
       .on('click', function (e) {
           // Ambil data dari marker yang diklik
           const data = e.target.options.data;

@@ -20,7 +20,7 @@
     <div class="overlay" id="overlay"></div>
 
     <aside class="sidebar" id="sidebar">
-        <div class="logo"><img src="/images/tirtatarum-logo-big.png">DIGITAL WATER</div>
+        <div class="logo"><img src="{{url('images/')}}tirtatarum-logo-big.png">DIGITAL WATER</div>
         <div class="sidebar-container">
             <div class="input-group">
                 <label>Cabang</label>

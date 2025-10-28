@@ -1,4 +1,4 @@
-a:5:{i:0;s:2851:"<!DOCTYPE html>
+a:5:{i:0;s:2876:"<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,7 +20,7 @@ a:5:{i:0;s:2851:"<!DOCTYPE html>
     <div class="overlay" id="overlay"></div>
 
     <aside class="sidebar" id="sidebar">
-        <div class="logo"><img src="/images/tirtatarum-logo-big.png">DIGITAL WATER</div>
+        <div class="logo"><img src="<?= $this->url->get('images/') ?>tirtatarum-logo-big.png">DIGITAL WATER</div>
         <div class="sidebar-container">
             <div class="input-group">
                 <label>Cabang</label>

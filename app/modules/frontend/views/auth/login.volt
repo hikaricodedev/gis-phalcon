@@ -307,11 +307,11 @@
             const password = document.getElementById('password').value;
             const remember = document.getElementById('remember').checked;
 
-            window.location = '/dashboard';
+            window.location = "{{url('/dashboard') }}";
         });
         document.getElementById('login-btn').addEventListener('click', function (e) {
             e.preventDefault();
-            window.location = '/dashboard';
+            window.location = "{{url('/dashboard') }}";
         });
     </script>
 </body>

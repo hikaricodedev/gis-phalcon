@@ -122,11 +122,11 @@
   .pressure-tip {
     
   }
-  /* .leaflet-tile {
+  .leaflet-tile {
     filter: hue-rotate(90deg) saturate(105%) contrast(98%) invert(90%);
     -webkit-filter: hue-rotate(90deg) saturate(105%) contrast(98%) invert(90%);
     -moz-filter: hue-rotate(90deg) saturate(105%) contrast(98%) invert(90%);
-  } */
+  }
 
 </style>
 <main class="main-content">
